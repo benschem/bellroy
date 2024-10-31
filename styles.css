@@ -1,0 +1,305 @@
+:root {
+  --white: #ffffff;
+  --grey-50: #f7f7f7;
+  --grey-100: #eceae4;
+  --grey-200:
+  --grey-300:
+  --grey-400:
+  --grey-500:
+  --grey-600:
+  --grey-700:
+  --grey-800: #222222;
+  --grey-900: #333333;
+
+  --bkg-color-light: var(--grey-50);
+  --bkg-color-dark: #eceae4;
+  --text-color-dark: var(--grey-900);
+  --header-bkg-color: #4763c3;
+  --header-text-color: var(--white);
+  --controls-bkg-color: #efeae5;
+  --btn-color: #c75724;
+  --btn-text-color: var(--white);
+  --footer-bkg-color: #222222;
+  --footer-text-color: #999999;
+  --grid-square-color: var(--grey-900);
+  --hero-bkg-color: #555f53;
+  --hero-text-color: var(--white);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "heading"
+    "products"
+    "sidebar";
+}
+@media screen and (width > 820px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      "heading heading heading"
+      "products products sidebar";
+  }
+}
+header {
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--header-bkg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header * {
+  /* I didn't link any of the Bellroy font stack, but I'm hoping your browser will have them cached */
+  font-family: GTUltra, Lato, sans-serif;
+  color: var(--header-text-color);
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.title-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: heading;
+  padding-inline: 4rem;
+  padding-block: 1rem;
+  background-color: var(--hero-bkg-color);
+  cursor: default;
+}
+h1 {
+  /* I didn't link any of the Bellroy font stack, but I'm hoping your browser will have them cached */
+  font-family: GTUltra, Frank Ruhl Libre, "PT Serif", "Noto Serif", "Noto Serif JP", "Noto Serif KR", "Noto Serif SC",
+    "Noto Serif TC", ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+  font-size: 1.75rem;
+  line-height: 3rem;
+  font-weight: 900;
+  color: var(--hero-text-color);
+  text-align: center;
+}
+@media screen and (width < 550px) {
+  h1 {
+    line-height: 2rem;
+    font-size: 1.25rem;
+  }
+}
+.robot {
+  z-index: 100;
+  width: 100px;
+  height: 100px;
+
+  position: absolute;
+  top: 225px;
+  left: 225px;
+
+  transform-origin: center;
+  transition: all 200ms linear;
+}
+@media screen and (width < 550px) {
+  .robot {
+    width: 70px;
+    height: 70px;
+  }
+}
+.products {
+  grid-area: products;
+  max-width: fit-content;
+  margin-inline: auto;
+  padding: 2rem 1rem;
+  position: relative;
+}
+.grid {
+  display: grid;
+}
+.grid-5x5 {
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: repeat(5, 100px);
+  gap: 0.25rem;
+}
+@media screen and (width < 550px) {
+  .grid-5x5 {
+    grid-template-columns: repeat(5, 70px);
+    grid-template-rows: repeat(5, 70px);
+  }
+}
+.grid-3x1 {
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.25rem;
+  grid-template-areas:
+    "controls"
+    "instructions";
+}
+.grid-square {
+  background-color: var(--bkg-color-light);
+  color: var(--grid-square-color);
+}
+.grid-square > img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+@media screen and (width < 550px) {
+  .grid-square > img {
+    width: 70px;
+    height: 70px;
+  }
+}
+.grid-square * {
+  mix-blend-mode: multiply;
+}
+.grid-square[data-row="2"],
+.grid-square[data-row="4"] {
+  background-color: var(--bkg-color-dark);
+}
+.sidebar {
+  grid-area: sidebar;
+  padding: 1rem;
+  background-color: var(--controls-bkg-color);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.controls {
+  grid-area: controls;
+  max-width: fit-content;
+  max-height: 100px;
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    "... forward ... "
+    "left forward right"
+    "left forward right";
+  gap: 0.25rem;
+}
+button {
+  cursor: pointer;
+  color: var(--btn-text-color);
+  background-color: var(--btn-color);
+  border: none;
+  will-change: scale;
+  transition: scale 200ms ease-out;
+}
+button:hover {
+  scale: 1.02;
+}
+button:active {
+  scale: 0.9;
+}
+button:visited {
+  color: var(--btn-text-color);
+}
+.controls button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 17px 9px -15px rgb(0 0 0 / 50%);
+  text-align: center;
+  padding-inline: 1rem;
+  width: 100%;
+  height: 100%;
+}
+.rotate-left-button {
+  font-size: 3rem;
+  grid-area: left;
+}
+.rotate-right-button {
+  font-size: 3rem;
+  grid-area: right;
+}
+.move-forward-button {
+  font-size: 3rem;
+  grid-area: forward;
+}
+.pressed {
+  scale: 0.9;
+}
+.instructions {
+  padding-inline: 2rem;
+  grid-area: instructions;
+  font-family: GTUltra, Lato, sans-serif;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+.instructions > p {
+  max-width: 35ch;
+}
+footer {
+  padding: 4rem;
+  background-color: var(--footer-bkg-color);
+}
+footer > * + * {
+  margin-block-start: 1rem;
+}
+footer * {
+  color: var(--footer-text-color);
+  cursor: default;
+  text-underline-offset: 0.2rem;
+  font-family: GTUltra, Lato, sans-serif;
+  font-size: 1rem;
+}
+footer p {
+  cursor: default;
+}
+footer ul {
+  padding-inline: 1rem;
+}
+footer ul li + li {
+  padding-block-start: 0.5rem;
+}
+footer a:hover {
+  cursor: pointer;
+  color: var(--btn-color);
+}
+footer .tests {
+  border-top: 1px solid var(--footer-text-color);
+  margin-block-start: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+footer .tests button {
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  margin-block-start: 2rem;
+  margin-block-end: 1rem;
+  color: var(--btn-text-color);
+}
+footer .tests p {
+  text-align: end;
+}
+@media screen and (max-width: 550px) {
+  .products {
+    padding: 2rem 0;
+  }
+  .grid-3x1 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "controls instructions";
+  }
+}
