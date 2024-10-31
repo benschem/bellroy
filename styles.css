@@ -14,7 +14,7 @@
   --brown-100: #efeae5;
 
   --bkg-color-light: var(--grey-50);
-  --bkg-color-dark: #var(--grey-100);
+  --bkg-color-dark: var(--grey-100);
   --text-color-dark: var(--green-900);
   --header-bkg-color: var(--accent-blue);
   --header-text-color: var(--white);
